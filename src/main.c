@@ -158,7 +158,7 @@ int main(void) {
         assert(ft_puts(NULL)  > 0);
         assert(ft_puts("")    > 0);
         dup2(out, 1);
-        ret = read(p[0], buf, 256);
+        ret = ft_read(p[0], buf, 256);
         buf[ret] = 0;
         close(p[0]);
         close(p[1]);
@@ -246,7 +246,7 @@ int main(void) {
 
             fd = open("cat.txt", O_RDONLY);
             assert(ft_cat(fd) == 0);
-            read(p[0], buf, 17);
+            ft_read(p[0], buf, 17);
             
             dup2(out, 1);
 
@@ -264,10 +264,13 @@ int main(void) {
             assert(ft_cat(fd) == -1);
         }
 
-        printf("ft_cat     SUCCESS\n\n");
+        printf("ft_cat     SUCCESS\n");
     }
 
-    printf("TOTAL ---> SUCCESS\n");
+    ft_write(1, "ft_write   SUCCESS\n", 19);
+    ft_putstr("ft_putstr  SUCCESS\n");
+    ft_putendl("ft_putendl SUCCESS");
 
-    return (EXIT_SUCCESS);
+    printf("TOTAL ---> SUCCESS\n");
+    ft_exit(0);
 }

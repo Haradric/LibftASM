@@ -21,7 +21,12 @@ SOURCE_ASM = src/ft_bzero.s   \
              src/ft_memset.s  \
              src/ft_memcpy.s  \
              src/ft_strdup.s  \
-             src/ft_cat.s
+             src/ft_cat.s     \
+             src/ft_exit.s    \
+             src/ft_read.s    \
+             src/ft_write.s   \
+             src/ft_putstr.s  \
+             src/ft_putendl.s
 OBJECT_ASM = $(SOURCE_ASM:.s=.o)
 
 SOURCE = src/main.c

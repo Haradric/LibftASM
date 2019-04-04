@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <stddef.h>
+#include <sys/types.h>
 
 void  ft_bzero(void *s, size_t n);
 char *ft_strcat(char *s1, const char *s2);
@@ -19,4 +19,10 @@ void   *ft_memset(void *b, int c, size_t len);
 void   *ft_memcpy(void *dst, const void *src, size_t n);
 char   *ft_strdup(const char *s1);
 
-int    ft_cat(int fd);
+int     ft_cat(int fd);
+
+void    ft_exit(int status);
+ssize_t ft_read(int fildes, void *buf, size_t nbyte);
+ssize_t ft_write(int fildes, const void *buf, size_t nbyte);
+void    ft_putstr(char const *s);
+void    ft_putendl(char const *s);
