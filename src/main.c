@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 int main(void) {
 
@@ -229,6 +230,41 @@ int main(void) {
         assert(ft_strdup(NULL) == NULL);
 
         printf("ft_strdup  SUCCESS\n");   
+    }
+
+    {
+        {
+            char    buf[256];
+            int     p[2];
+            int     fd;
+            int     out = dup(1);
+
+            pipe(p);
+            dup2(p[1], 1);
+
+            system("echo '12345678912345678' > cat.txt");
+
+            fd = open("cat.txt", O_RDONLY);
+            assert(ft_cat(fd) == 0);
+            read(p[0], buf, 17);
+            
+            dup2(out, 1);
+
+            close(p[0]);
+            close(p[1]);
+            close(fd);
+            close(out);
+            system("rm cat.txt");
+            assert(memcmp(buf, "12345678912345678", 17) == 0);
+        }
+
+        {
+            int fd = open("Makefile", O_RDONLY);
+            close(fd);
+            assert(ft_cat(fd) == -1);
+        }
+
+        printf("ft_cat     SUCCESS\n\n");
     }
 
     printf("TOTAL ---> SUCCESS\n");
