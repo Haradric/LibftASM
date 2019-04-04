@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <strings.h> // bzero()
 #include <assert.h>
 #include <stdio.h>
@@ -144,7 +145,7 @@ int main(void) {
 
     /* int ft_puts(const char *s); */
     {
-        int     ret;
+        size_t  ret;
         int     out;
         int     p[2];
         char    buf[256];
@@ -166,6 +167,68 @@ int main(void) {
                            "\n") == 0);
 
         printf("ft_puts    SUCCESS\n");
+    }
+
+    {
+        const char *str1 = "";
+        const char *str2 = "abcdefg";
+        const char *str3 = "abcdefg\0abcdefg";
+
+        assert(ft_strlen(str1) == strlen(str1));
+        assert(ft_strlen(str2) == strlen(str2));
+        assert(ft_strlen(str3) == strlen(str3));
+
+        printf("ft_strlen  SUCCESS\n");
+    }
+
+    {
+        {
+            char s1[256] = {0};
+
+            assert(ft_memset(s1, 'x', 256) == memset(s1, 'x', 256));
+        }
+
+        {
+            char s1[256] = {0};
+            char s2[256] = {0};
+
+            ft_memset(s1, 'x', 256);
+            memset(s2, 'x', 256);
+            assert(memcmp(s1, s2, 256) == 0);
+        }
+
+        {
+            char s1[256] = {0};
+
+            s1[0] = 'x';
+            ft_memset(s1, 0, 0);
+            assert(s1[0] == 'x');
+        }
+
+        printf("ft_memset  SUCCESS\n");   
+    }
+
+    {
+        {
+            char s1[256] = {0};
+            char s2[256] = {0};
+
+            memset(s1, 'x', 256);
+            memset(s2, 'y', 256);
+            ft_memcpy(s1, s2, 256);
+            assert(memcmp(s1, s2, 256) == 0);
+            assert(ft_memcpy(s1, s2, 0) == s1);
+        }
+
+        printf("ft_memcpy  SUCCESS\n");
+    }
+
+    {
+        assert(strcmp(ft_strdup("aaaaa"), "aaaaa") == 0);
+        assert(strcmp(ft_strdup(""), "") == 0);
+        assert(ft_strdup(NULL) == NULL);
+
+        printf("ft_strdup  SUCCESS\n");   
     }
 
     printf("TOTAL ---> SUCCESS\n");

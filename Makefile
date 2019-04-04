@@ -2,9 +2,9 @@
 ASM = nasm
 CC  = gcc
 
-override CFLAGS_ASM  += -g -f macho64
+override CFLAGS_ASM  += -g -O0 -f macho64
 override LDFLAGS_ASM +=
-override CFLAGS      += -g -std=c11 -Wall -Wextra -Wpedantic -Werror -Wno-suspicious-bzero -flto -march=native -Iinclude
+override CFLAGS      += -g -O0 -std=c11 -Wall -Wextra -Wpedantic -Werror -Wno-suspicious-bzero -march=native -Iinclude
 override LDFLAGS     +=
 
 SOURCE_ASM = src/ft_bzero.s   \
@@ -16,7 +16,11 @@ SOURCE_ASM = src/ft_bzero.s   \
              src/ft_isprint.s \
              src/ft_toupper.s \
              src/ft_tolower.s \
-             src/ft_puts.s
+             src/ft_puts.s    \
+             src/ft_strlen.s  \
+             src/ft_memset.s  \
+             src/ft_memcpy.s  \
+             src/ft_strdup.s
 OBJECT_ASM = $(SOURCE_ASM:.s=.o)
 
 SOURCE = src/main.c
